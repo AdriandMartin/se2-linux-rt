@@ -1,0 +1,50 @@
+     rcu_preempt-10    [000]   799.126663: sched_switch:         prev_comm=rcu_preempt prev_pid=10 prev_prio=120 prev_state=S ==> next_comm=stress-ng next_pid=396 next_prio=120
+       stress-ng-396   [000]   799.127225: sched_wakeup:         comm=trace-cmd pid=395 prio=120 success=1 target_cpu=000
+       stress-ng-396   [000]   799.127244: sched_switch:         prev_comm=stress-ng prev_pid=396 prev_prio=120 prev_state=R+ ==> next_comm=trace-cmd next_pid=395 next_prio=120 Latency: 19.000 usecs
+       trace-cmd-395   [000]   799.127330: sched_switch:         prev_comm=trace-cmd prev_pid=395 prev_prio=120 prev_state=S ==> next_comm=stress-ng next_pid=396 next_prio=120
+       stress-ng-396   [000]   799.127365: sched_wakeup:         comm=irq/28-edma pid=18 prio=49 success=1 target_cpu=000
+       stress-ng-396   [000]   799.127380: sched_switch:         prev_comm=stress-ng prev_pid=396 prev_prio=120 prev_state=R+ ==> next_comm=irq/28-edma next_pid=18 next_prio=49 Latency: 14.542 usecs
+     irq/28-edma-18    [000]   799.127439: sched_switch:         prev_comm=irq/28-edma prev_pid=18 prev_prio=49 prev_state=S ==> next_comm=stress-ng next_pid=396 next_prio=120
+       stress-ng-396   [000]   799.127529: sched_wakeup:         comm=irq/80-mmc0 pid=63 prio=49 success=1 target_cpu=000
+       stress-ng-396   [000]   799.127542: sched_switch:         prev_comm=stress-ng prev_pid=396 prev_prio=120 prev_state=R+ ==> next_comm=irq/80-mmc0 next_pid=63 next_prio=49 Latency: 12.250 usecs
+     irq/80-mmc0-63    [000]   799.127579: sched_switch:         prev_comm=irq/80-mmc0 prev_pid=63 prev_prio=49 prev_state=S ==> next_comm=stress-ng next_pid=396 next_prio=120
+       stress-ng-396   [000]   799.127892: sched_wakeup:         comm=irq/80-mmc0 pid=63 prio=49 success=1 target_cpu=000
+       stress-ng-396   [000]   799.127903: sched_switch:         prev_comm=stress-ng prev_pid=396 prev_prio=120 prev_state=R+ ==> next_comm=irq/80-mmc0 next_pid=63 next_prio=49 Latency: 11.584 usecs
+     irq/80-mmc0-63    [000]   799.127936: sched_wakeup:         comm=mmcqd/0 pid=65 prio=120 success=1 target_cpu=000
+     irq/80-mmc0-63    [000]   799.127954: sched_switch:         prev_comm=irq/80-mmc0 prev_pid=63 prev_prio=49 prev_state=S ==> next_comm=mmcqd/0 next_pid=65 next_prio=120 Latency: 18.042 usecs
+         mmcqd/0-65    [000]   799.127990: sched_wakeup:         comm=irq/80-mmc0 pid=63 prio=49 success=1 target_cpu=000
+         mmcqd/0-65    [000]   799.128003: sched_switch:         prev_comm=mmcqd/0 prev_pid=65 prev_prio=120 prev_state=D ==> next_comm=irq/80-mmc0 next_pid=63 next_prio=49 Latency: 12.916 usecs
+     irq/80-mmc0-63    [000]   799.128022: sched_wakeup:         comm=mmcqd/0 pid=65 prio=120 success=1 target_cpu=000
+     irq/80-mmc0-63    [000]   799.128038: sched_switch:         prev_comm=irq/80-mmc0 prev_pid=63 prev_prio=49 prev_state=S ==> next_comm=mmcqd/0 next_pid=65 next_prio=120 Latency: 16.209 usecs
+         mmcqd/0-65    [000]   799.128089: sched_wakeup:         comm=irq/80-mmc0 pid=63 prio=49 success=1 target_cpu=000
+         mmcqd/0-65    [000]   799.128100: sched_switch:         prev_comm=mmcqd/0 prev_pid=65 prev_prio=120 prev_state=R+ ==> next_comm=irq/80-mmc0 next_pid=63 next_prio=49 Latency: 10.833 usecs
+     irq/80-mmc0-63    [000]   799.128118: sched_switch:         prev_comm=irq/80-mmc0 prev_pid=63 prev_prio=49 prev_state=S ==> next_comm=mmcqd/0 next_pid=65 next_prio=120
+         mmcqd/0-65    [000]   799.128389: sched_wakeup:         comm=trace-cmd pid=395 prio=120 success=1 target_cpu=000
+         mmcqd/0-65    [000]   799.128438: sched_wakeup:         comm=ksoftirqd/0 pid=3 prio=98 success=1 target_cpu=000
+         mmcqd/0-65    [000]   799.128450: sched_switch:         prev_comm=mmcqd/0 prev_pid=65 prev_prio=120 prev_state=R+ ==> next_comm=ksoftirqd/0 next_pid=3 next_prio=98 Latency: 12.458 usecs
+     ksoftirqd/0-3     [000]   799.128483: sched_wakeup:         comm=rcu_preempt pid=10 prio=120 success=1 target_cpu=000
+     ksoftirqd/0-3     [000]   799.128512: sched_switch:         prev_comm=ksoftirqd/0 prev_pid=3 prev_prio=98 prev_state=S ==> next_comm=rcu_preempt next_pid=10 next_prio=120 Latency: 29.583 usecs
+     rcu_preempt-10    [000]   799.128545: sched_switch:         prev_comm=rcu_preempt prev_pid=10 prev_prio=120 prev_state=S ==> next_comm=mmcqd/0 next_pid=65 next_prio=120
+         mmcqd/0-65    [000]   799.128609: sched_switch:         prev_comm=mmcqd/0 prev_pid=65 prev_prio=120 prev_state=D ==> next_comm=trace-cmd next_pid=395 next_prio=120 Latency: 219.208 usecs
+       trace-cmd-395   [000]   799.128700: sched_switch:         prev_comm=trace-cmd prev_pid=395 prev_prio=120 prev_state=S ==> next_comm=stress-ng next_pid=396 next_prio=120
+       stress-ng-396   [000]   799.129771: sched_wakeup:         comm=trace-cmd pid=395 prio=120 success=1 target_cpu=000
+       stress-ng-396   [000]   799.129808: sched_switch:         prev_comm=stress-ng prev_pid=396 prev_prio=120 prev_state=R+ ==> next_comm=trace-cmd next_pid=395 next_prio=120 Latency: 37.375 usecs
+       trace-cmd-395   [000]   799.129890: sched_switch:         prev_comm=trace-cmd prev_pid=395 prev_prio=120 prev_state=S ==> next_comm=stress-ng next_pid=396 next_prio=120
+       stress-ng-396   [000]   799.130312: sched_wakeup:         comm=trace-cmd pid=394 prio=120 success=1 target_cpu=000
+       stress-ng-396   [000]   799.130329: sched_switch:         prev_comm=stress-ng prev_pid=396 prev_prio=120 prev_state=x ==> next_comm=trace-cmd next_pid=394 next_prio=120 Latency: 17.667 usecs
+       trace-cmd-394   [000]   799.130411: sched_wakeup:         comm=ksoftirqd/0 pid=3 prio=98 success=1 target_cpu=000
+       trace-cmd-394   [000]   799.130424: sched_switch:         prev_comm=trace-cmd prev_pid=394 prev_prio=120 prev_state=R+ ==> next_comm=ksoftirqd/0 next_pid=3 next_prio=98 Latency: 13.333 usecs
+     ksoftirqd/0-3     [000]   799.130460: sched_wakeup:         comm=rcu_preempt pid=10 prio=120 success=1 target_cpu=000
+     ksoftirqd/0-3     [000]   799.130522: sched_switch:         prev_comm=ksoftirqd/0 prev_pid=3 prev_prio=98 prev_state=S ==> next_comm=rcu_preempt next_pid=10 next_prio=120 Latency: 61.917 usecs
+     rcu_preempt-10    [000]   799.130555: sched_switch:         prev_comm=rcu_preempt prev_pid=10 prev_prio=120 prev_state=S ==> next_comm=trace-cmd next_pid=394 next_prio=120
+
+Average wakeup latency: 65.010 usecs
+Maximum Latency: 3418.292 usecs at timestamp: 798.395919
+Minimum Latency: 6.958 usecs at timestamp: 791.188992
+
+RT task timings:
+
+Average wakeup latency: 12.435 usecs
+Maximum Latency: 76.708 usecs at timestamp: 799.099169
+Minimum Latency: 6.958 usecs at timestamp: 791.188992
+

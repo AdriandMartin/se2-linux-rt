@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 1541 us, #714/714, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: ksoftirqd/0-3 (uid:0 nice:0 policy:1 rt_prio:1)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+stress-n-705     0d...5..    1us+:    705:120:R   + [000]     3: 98:R ksoftirqd/0
+stress-n-705     0d...5..    5us+: 0
+stress-n-705     0d...5..    7us+: check_preempt_curr <-ttwu_do_wakeup
+stress-n-705     0d...5..    9us+: resched_task <-check_preempt_curr
+stress-n-705     0dN..5..   12us+: task_woken_rt <-ttwu_do_wakeup
+stress-n-705     0dN..5..   14us+: _raw_spin_unlock <-try_to_wake_up
+stress-n-705     0dN..5..   16us+: sub_preempt_count <-_raw_spin_unlock
+stress-n-705     0dN..4..   18us+: ttwu_stat <-try_to_wake_up
+stress-n-705     0dN..4..   21us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+stress-n-705     0dN..4..   23us+: sub_preempt_count <-_raw_spin_unlock_irqrestore
+stress-n-705     0dN..3..   26us+: idle_cpu <-irq_exit
+stress-n-705     0dN..3..   28us+: rcu_irq_exit <-irq_exit
+stress-n-705     0dN..3..   30us+: sub_preempt_count <-handle_IRQ
+stress-n-705     0dN..2..   32us+: irq_find_mapping <-omap3_intc_handle_irq
+stress-n-705     0dN..2..   34us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+stress-n-705     0dN..2..   36us+: handle_IRQ <-omap3_intc_handle_irq
+stress-n-705     0dN..2..   38us+: irq_enter <-handle_IRQ
+stress-n-705     0dN..2..   40us+: rcu_irq_enter <-irq_enter
+stress-n-705     0dN..2..   43us+: add_preempt_count <-irq_enter
+stress-n-705     0dN.h2..   45us+: generic_handle_irq <-handle_IRQ
+stress-n-705     0dN.h2..   47us+: irq_to_desc <-generic_handle_irq
+stress-n-705     0dN.h2..   49us+: handle_level_irq <-generic_handle_irq
+stress-n-705     0dN.h2..   51us+: _raw_spin_lock <-handle_level_irq
+stress-n-705     0dN.h2..   53us+: add_preempt_count <-_raw_spin_lock
+stress-n-705     0dN.h3..   56us+: irq_gc_mask_disable_reg <-handle_level_irq
+stress-n-705     0dN.h3..   57us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+stress-n-705     0dN.h3..   59us+: add_preempt_count <-_raw_spin_lock
+stress-n-705     0dN.h4..   62us+: _raw_spin_unlock <-handle_level_irq
+stress-n-705     0dN.h4..   64us+: sub_preempt_count <-_raw_spin_unlock

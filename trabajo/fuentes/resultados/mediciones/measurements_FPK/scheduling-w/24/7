@@ -1,0 +1,50 @@
+       trace-cmd-1261  [000]  2574.238519: sched_switch:         prev_comm=trace-cmd prev_pid=1261 prev_prio=120 prev_state=S ==> next_comm=swapper/0 next_pid=0 next_prio=120
+          <idle>-0     [000]  2574.238983: sched_wakeup:         comm=stress-ng-sleep pid=1279 prio=120 success=1 target_cpu=000
+          <idle>-0     [000]  2574.239007: sched_switch:         prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=R ==> next_comm=stress-ng-sleep next_pid=1279 next_prio=120 Latency: 23.667 usecs
+ stress-ng-sleep-1279  [000]  2574.239035: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1279 prev_prio=120 prev_state=S ==> next_comm=swapper/0 next_pid=0 next_prio=120
+          <idle>-0     [000]  2574.239570: sched_wakeup:         comm=trace-cmd pid=1261 prio=120 success=1 target_cpu=000
+          <idle>-0     [000]  2574.239595: sched_switch:         prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=R ==> next_comm=trace-cmd next_pid=1261 next_prio=120 Latency: 24.833 usecs
+       trace-cmd-1261  [000]  2574.239647: sched_switch:         prev_comm=trace-cmd prev_pid=1261 prev_prio=120 prev_state=S ==> next_comm=swapper/0 next_pid=0 next_prio=120
+          <idle>-0     [000]  2574.240301: sched_wakeup:         comm=stress-ng-sleep pid=1285 prio=120 success=1 target_cpu=000
+          <idle>-0     [000]  2574.240326: sched_switch:         prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=R ==> next_comm=stress-ng-sleep next_pid=1285 next_prio=120 Latency: 25.292 usecs
+ stress-ng-sleep-1285  [000]  2574.240365: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1285 prev_prio=120 prev_state=S ==> next_comm=swapper/0 next_pid=0 next_prio=120
+          <idle>-0     [000]  2574.240413: sched_wakeup:         comm=stress-ng-sleep pid=1285 prio=120 success=1 target_cpu=000
+          <idle>-0     [000]  2574.240436: sched_switch:         prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=R ==> next_comm=stress-ng-sleep next_pid=1285 next_prio=120 Latency: 22.292 usecs
+ stress-ng-sleep-1285  [000]  2574.240459: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1285 prev_prio=120 prev_state=S ==> next_comm=swapper/0 next_pid=0 next_prio=120
+          <idle>-0     [000]  2574.240509: sched_wakeup:         comm=stress-ng-sleep pid=1285 prio=120 success=1 target_cpu=000
+          <idle>-0     [000]  2574.240530: sched_switch:         prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=R ==> next_comm=stress-ng-sleep next_pid=1285 next_prio=120 Latency: 21.166 usecs
+ stress-ng-sleep-1285  [000]  2574.240551: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1285 prev_prio=120 prev_state=S ==> next_comm=swapper/0 next_pid=0 next_prio=120
+          <idle>-0     [000]  2574.240588: sched_wakeup:         comm=stress-ng-sleep pid=1274 prio=120 success=1 target_cpu=000
+          <idle>-0     [000]  2574.240597: sched_wakeup:         comm=stress-ng-sleep pid=1285 prio=120 success=1 target_cpu=000
+          <idle>-0     [000]  2574.240619: sched_switch:         prev_comm=swapper/0 prev_pid=0 prev_prio=120 prev_state=R ==> next_comm=stress-ng-sleep next_pid=1274 next_prio=120 Latency: 30.584 usecs
+ stress-ng-sleep-1274  [000]  2574.240649: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1274 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=1285 next_prio=120 Latency: 51.625 usecs
+ stress-ng-sleep-1285  [000]  2574.240670: sched_wakeup:         comm=stress-ng-sleep pid=1282 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-1285  [000]  2574.240682: sched_wakeup:         comm=trace-cmd pid=1261 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-1285  [000]  2574.240691: sched_wakeup:         comm=stress-ng-sleep pid=1274 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-1285  [000]  2574.240717: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1285 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=1282 next_prio=120 Latency: 46.542 usecs
+ stress-ng-sleep-1282  [000]  2574.240743: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1282 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=1274 next_prio=120 Latency: 52.583 usecs
+ stress-ng-sleep-1274  [000]  2574.240759: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1274 prev_prio=120 prev_state=S ==> next_comm=trace-cmd next_pid=1261 next_prio=120 Latency: 77.458 usecs
+       trace-cmd-1261  [000]  2574.240779: sched_wakeup:         comm=stress-ng-sleep pid=1285 prio=120 success=1 target_cpu=000
+       trace-cmd-1261  [000]  2574.240789: sched_wakeup:         comm=stress-ng-sleep pid=1282 prio=120 success=1 target_cpu=000
+       trace-cmd-1261  [000]  2574.240799: sched_wakeup:         comm=stress-ng-sleep pid=1274 prio=120 success=1 target_cpu=000
+       trace-cmd-1261  [000]  2574.240809: sched_wakeup:         comm=stress-ng-sleep pid=1284 prio=120 success=1 target_cpu=000
+       trace-cmd-1261  [000]  2574.240830: sched_wakeup:         comm=irq/28-edma pid=18 prio=49 success=1 target_cpu=000
+       trace-cmd-1261  [000]  2574.240841: sched_switch:         prev_comm=trace-cmd prev_pid=1261 prev_prio=120 prev_state=R ==> next_comm=irq/28-edma next_pid=18 next_prio=49 Latency: 10.792 usecs
+     irq/28-edma-18    [000]  2574.240894: sched_switch:         prev_comm=irq/28-edma prev_pid=18 prev_prio=49 prev_state=S ==> next_comm=stress-ng-sleep next_pid=1284 next_prio=120 Latency: 85.708 usecs
+ stress-ng-sleep-1284  [000]  2574.240934: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1284 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=1282 next_prio=120 Latency: 144.459 usecs
+ stress-ng-sleep-1282  [000]  2574.240953: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1282 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=1274 next_prio=120 Latency: 154.042 usecs
+ stress-ng-sleep-1274  [000]  2574.240971: sched_switch:         prev_comm=stress-ng-sleep prev_pid=1274 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=1285 next_prio=120 Latency: 191.709 usecs
+ stress-ng-sleep-1285  [000]  2574.240987: sched_wakeup:         comm=irq/80-mmc0 pid=63 prio=49 success=1 target_cpu=000
+ stress-ng-sleep-1285  [000]  2574.241005: sched_wakeup:         comm=stress-ng-sleep pid=1284 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-1285  [000]  2574.241013: sched_wakeup:         comm=stress-ng-sleep pid=1282 prio=120 success=1 target_cpu=000
+
+Average wakeup latency: 132.069 usecs
+Maximum Latency: 12460.625 usecs at timestamp: 2573.450296
+Minimum Latency: 7.167 usecs at timestamp: 2565.341357
+
+RT task timings:
+
+Average wakeup latency: 13.315 usecs
+Maximum Latency: 100.167 usecs at timestamp: 2573.439008
+Minimum Latency: 7.167 usecs at timestamp: 2565.341357
+

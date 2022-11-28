@@ -1,0 +1,20 @@
+#!/usr/bin/busybox ash
+
+# Instalación de links para todos los comandos de
+# busybox, realmente solo necesario la primera vez,
+# pero es idempotente
+
+/usr/bin/busybox mount -t proc none /proc
+/usr/bin/busybox mount -t sysfs none /sys
+/usr/bin/busybox mount -o remount,rw /
+
+/usr/bin/busybox --install -s /usr/bin
+
+# Necesario si u-boot nos arranca con el sistema raíz
+# en read-only
+#/usr/bin/mount -o remount,rw /
+
+# Añadido en el trabajo para montar el sistema de ficheros de ftrace
+/usr/bin/mount -t debugfs nodev /sys/kernel/debug
+
+/bin/ash

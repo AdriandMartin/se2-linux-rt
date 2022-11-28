@@ -1,0 +1,50 @@
+cpus=1
+# tracer: irqsoff
+#
+# irqsoff latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 1552 us, #756/756, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: ksoftirqd/0-3 (uid:0 nice:0 policy:1 rt_prio:1)
+#    -----------------
+#  => started at: __irq_usr
+#  => ended at:   _raw_spin_unlock_irq
+#
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+   <...>-559     0d......    1us+: __irq_usr
+   <...>-559     0d...1..    3us+: irq_find_mapping <-omap3_intc_handle_irq
+   <...>-559     0d...1..    5us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+   <...>-559     0d...1..    6us+: handle_IRQ <-omap3_intc_handle_irq
+   <...>-559     0d...1..    8us+: irq_enter <-handle_IRQ
+   <...>-559     0d...1..   10us+: rcu_irq_enter <-irq_enter
+   <...>-559     0d...1..   12us+: add_preempt_count <-irq_enter
+   <...>-559     0d..h1..   14us+: generic_handle_irq <-handle_IRQ
+   <...>-559     0d..h1..   16us+: irq_to_desc <-generic_handle_irq
+   <...>-559     0d..h1..   18us+: handle_level_irq <-generic_handle_irq
+   <...>-559     0d..h1..   20us+: _raw_spin_lock <-handle_level_irq
+   <...>-559     0d..h1..   22us+: add_preempt_count <-_raw_spin_lock
+   <...>-559     0d..h2..   24us+: irq_gc_mask_disable_reg <-handle_level_irq
+   <...>-559     0d..h2..   26us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+   <...>-559     0d..h2..   27us+: add_preempt_count <-_raw_spin_lock
+   <...>-559     0d..h3..   30us+: _raw_spin_unlock <-handle_level_irq
+   <...>-559     0d..h3..   32us+: sub_preempt_count <-_raw_spin_unlock
+   <...>-559     0d..h2..   34us+: omap_mask_ack_irq <-handle_level_irq
+   <...>-559     0d..h2..   36us+: irq_gc_mask_disable_reg <-omap_mask_ack_irq
+   <...>-559     0d..h2..   37us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+   <...>-559     0d..h2..   39us+: add_preempt_count <-_raw_spin_lock
+   <...>-559     0d..h3..   41us+: _raw_spin_unlock <-omap_mask_ack_irq
+   <...>-559     0d..h3..   43us+: sub_preempt_count <-_raw_spin_unlock
+   <...>-559     0d..h2..   45us+: handle_irq_event <-handle_level_irq
+   <...>-559     0d..h2..   47us+: _raw_spin_unlock <-handle_irq_event
+   <...>-559     0d..h2..   49us+: sub_preempt_count <-_raw_spin_unlock

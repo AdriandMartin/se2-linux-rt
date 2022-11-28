@@ -1,0 +1,50 @@
+cpus=1
+# tracer: irqsoff
+#
+# irqsoff latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 4626 us, #82/82, CPU#0 | (M:server VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: stress-ng-sleep-119 (uid:0 nice:0 policy:0 rt_prio:0)
+#    -----------------
+#  => started at: _raw_spin_lock_irqsave
+#  => ended at:   __do_softirq
+#
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+stress-n-119     0d..h...    1us+: _raw_spin_lock_irqsave
+stress-n-119     0d..h...    3us+: rpm_resume <-__pm_runtime_resume
+stress-n-119     0d..h...    7us+: pm_runtime_deactivate_timer <-rpm_resume
+stress-n-119     0d..h...   10us+: _raw_spin_unlock_irqrestore <-__pm_runtime_resume
+stress-n-119     0d..h...   13us+: _raw_spin_lock_irqsave <-serial_omap_console_write
+stress-n-119     0d..h...   16us+: uart_console_write <-serial_omap_console_write
+stress-n-119     0d..h...   19us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...   24us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  115us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  205us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  296us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  387us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  478us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  570us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  661us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  753us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  845us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h...  936us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1026us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1118us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1208us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1298us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1390us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1482us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1573us+: serial_omap_console_putchar <-uart_console_write
+stress-n-119     0d..h... 1663us+: serial_omap_console_putchar <-uart_console_write

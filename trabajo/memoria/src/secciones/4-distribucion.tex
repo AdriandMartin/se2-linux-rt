@@ -1,0 +1,36 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Modificaciones en la distribución}
+
+En este apartado se van a comentar las modificaciones a la distribución de la práctica tres que se tuvieron que realizar para el trabajo.
+
+%----------------------------------------------------------------------------------
+\subsection{Kernel}
+
+Dado que se utilizan dos núcleos en el trabajo, y con el fin de evitar tener que renombrarlos cada vez que se quiera usar uno u otro, se han copiado ambos bajo \it{/boot} con los nombres indicados en el apartado 2 de la memoria y se ha creado un enlace simbólico, llamado \it{zImage} (pues es el nombre con el que se espera encontrar el kernel bajo \it{/boot}), a aquel con el cuál se quiere arrancar la distribución.
+
+Esto se hace con el comando siguiente:
+\begin{codigo}{bash}
+# zImage es solo un enlace simbólico a aquel núcleo con el que se quiere trabajar
+ln -s zImage_ftrace_[NFP o FPK] zImage
+\end{codigo}
+
+%----------------------------------------------------------------------------------
+\subsection{Script de inicialización}
+
+Se editó el script de arranque del sistema (fichero \it{/etc/init.d/rcS}) para que monte el sistema de ficheros de ftrace, \it{tracefs}, en la ruta standard.
+
+Esto supuso añadir, antes de la línea en la que se ejecuta el shell mediante \it{/bin/ash}, lo siguiente:
+\begin{codigo}{bash}
+# NOTA: esto hace accesible el tracefs en /sys/kernel/debug/tracing
+/usr/bin/mount -t debugfs nodev /sys/kernel/debug
+\end{codigo}
+
+%----------------------------------------------------------------------------------
+\subsection{Instalación de las herramientas}
+
+Una vez compiladas, la instalación de las herramientas consistió en copiar los binarios ejecutables (ficheros \it{tracecmd/trace-cmd} y \it{stress-ng}) en el directorio \it{/usr/bin} de la distribución.
+
+\end{document}

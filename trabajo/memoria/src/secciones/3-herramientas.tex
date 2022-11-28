@@ -1,0 +1,59 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\section{Herramientas}
+
+En este apartado se va a comentar brevemente el proceso de compilación de cada una de las herramientas adicionales que se han instalado en la distribución para facilitar la realización de pruebas con ftrace y la generación de carga de trabajo para las mismas.
+
+Dado que la distribución no cuenta con librerías compartidas instaladas , es necesario que la compilación se realice mediante enlace estático, para que no haya dependencias no satisfechas en tiempo de ejecución.
+
+Por otra parte, y al igual que ha pasado con el kernel y con la herramienta \it{busybox}, es necesario hacer cross-compiling, ya que la arquitectura target es \it{ARM}.
+
+Cabe destacar la importancia que tuvieron los ficheros \it{README} de cada uno de los repositorios correspondientes a las herramientas que se iban a compilar, ya que aparte de éstos no se disponía de más documentación que lo extrapolable del propio fichero \it{Makefile} para la construcción.
+
+%----------------------------------------------------------------------------------
+\subsection{Trace-cmd}
+
+Como ya se comentó en el primer apartado de la memoria, se decició utilizar esta herramienta dada la incomodidad que suponía trabajar directamente con ftrace a través del sistema de ficheros.
+
+El proceso de compilación comenzaba descargando los fuentes y revisando la versión que se deseaba utilizar:
+\begin{codigo}{bash}
+git clone git://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git
+git checkout trace-cmd-v2.9.1
+\end{codigo}
+
+Después, bastaba con dar valor a las variables \it{LDFLAGS} y \it{CC} del \it{Makefile} para indicar, respectivamente, que el enlace debía ser dinámico y cuál software de cross-compilación que se deseaba utilizar:
+\begin{codigo}{bash}
+export CC="/usr/local/linaro/gcc/bin/arm-linux-gnueabihf-"
+make LDFLAGS=-static CC=${CC}gcc trace-cmd
+\end{codigo}
+
+Tras ello, en el directorio \it{tracecmd/} del repositorio quedaba ubicado el ejecutable correspondiente a la herramienta en cuestión.
+
+%----------------------------------------------------------------------------------
+\subsection{Stress-ng}
+
+El uso de \it{stress-ng} se debió a los problemas que hubo para portar la herramienta \it{sysbench} a la distribución; todos ellos derivaban de la necesidad de instalar y configurar aparte la librería \it{LuaJIT}.
+
+Dado que se encontró \it{stress-ng} y se consiguió portarlo a la distribución en relativamente poco tiempo, fue ésta la herramienta que se utilizó para realizar las pruebas del trabajo.
+
+El proceso de compilación comenzaba descargando los fuentes y revisando la versión que se deseaba utilizar:
+\begin{codigo}{bash}
+git clone https://github.com/ColinIanKing/stress-ng.git
+git checkout V0.11.00
+\end{codigo}
+
+Cabe destacar que en el caso de esta herramienta, se siguieron las instrucciones del \it{README} para Android \cite{documentacion-stress-ng-android}, ya que era la plataforma documentada más parecida a la que se iba a utilizar (cross-compiling para Linux sobre ARM).
+
+Así, la compilación consistió en ejecutar los comandos siguientes:
+\begin{codigo}{bash}
+export $(dpkg-architecture -aarmhf)
+export CROSS_COMPILE="/usr/local/linaro/gcc/bin/arm-linux-gnueabihf-"
+export CCPREFIX=${CROSS_COMPILE}
+export CC=${CROSS_COMPILE}gcc
+make ARCH=arm STATIC=1
+\end{codigo}
+
+Como resultado, se generó el binario ejecutable correspondiente a la herramienta.
+
+\end{document}

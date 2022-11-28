@@ -1,0 +1,24 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Conclusiones}
+
+En este apartado se van a analizar los resultados obtenidos en los experimentos y se va a llevar a cabo una reflexión sobre las posibles mejoras en el trabajo realizado.
+
+\subsection{No Forced Preemtion vs. Fully Preemptible Kernel}
+
+En las tablas y las gráficas se puede observar como el kernel configurado con \it{full preemption} presenta latencias más altas que el configurado con \it{no forced preemption}, lo cual es coherente con el hecho de que el planificador esté siendo invocado con una mayor frecuencia en el primero de ellos. Además, el contraste es todavía más evidente si se tiene en cuenta que con esquema de expulsión \it{no forced preemption} es con el que menos intervenciones del scheduler se realizan.
+
+En ambos casos existe una gran variabilidad entre las latencias medidas en las diferentes experimentaciones realizadas, siendo este hecho evidente al analizar la desviación típica de cada una de las pruebas. Si bien puede considerarse que algunas de las ejecuciones den medidas espurias, el hecho de que ocurra para casi todas las pruebas hace que se deba considerar más bien como una tónica general. A diferencia de lo que cabría esperar, la configuración \it{full preemption} presenta una variabilidad similar a la \it{no forced preemption}, incluso cuando la carga de trabajo es elevada.
+
+Por lo tanto, a la vista de los resultados, no parece que el uso de Linux RT en esta plataforma en particular sea una buena idea si lo que se pretende es obtener garantías tiempo real.
+
+%----------------------------------------------------------------------------------
+\subsection{Posibles mejoras}
+
+El tiempo de ejecución del script \it{obtain\_latencies.sh} es especialmente elevado, en parte por el tamaño de las trazas que se analizan, pero también debido a que el procesamiento se está llevando a cabo con bash. Sería interesante migrar el script a Python o a otro lenguaje con mejores prestaciones, ya que si bien Python seguiría siendo lento, mejoraría considerablemente el tiempo de ejecución con respecto a bash.
+
+Por otra parte, me habría gustado analizar las trazas obtenidas usando \it{kernel shark}, pues he visto que sirve como visor de los ficheros \it{trace.dat} que se generan con \it{trace-cmd}, y debe ser especialmente útil combinado con el tracer \it{function\_graph}.
+
+\end{document}

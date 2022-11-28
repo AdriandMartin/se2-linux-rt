@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 725 us, #333/333, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: irq/28-edma-18 (uid:0 nice:0 policy:1 rt_prio:50)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+  <idle>-0       0d..h4..    2us+:      0:120:R   + [000]    18: 49:R irq/28-edma
+  <idle>-0       0d..h4..    4us+: 0
+  <idle>-0       0d..h4..    7us+: check_preempt_curr <-ttwu_do_wakeup
+  <idle>-0       0d..h4..    9us+: resched_task <-check_preempt_curr
+  <idle>-0       0dN.h4..   11us+: task_woken_rt <-ttwu_do_wakeup
+  <idle>-0       0dN.h4..   13us+: _raw_spin_unlock <-try_to_wake_up
+  <idle>-0       0dN.h4..   16us+: sub_preempt_count <-_raw_spin_unlock
+  <idle>-0       0dN.h3..   18us+: ttwu_stat <-try_to_wake_up
+  <idle>-0       0dN.h3..   20us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+  <idle>-0       0dN.h3..   22us+: sub_preempt_count <-_raw_spin_unlock_irqrestore
+  <idle>-0       0dN.h2..   25us+: note_interrupt <-handle_irq_event_percpu
+  <idle>-0       0dN.h2..   27us+: _raw_spin_lock <-handle_irq_event
+  <idle>-0       0dN.h2..   29us+: add_preempt_count <-_raw_spin_lock
+  <idle>-0       0dN.h3..   31us+: cond_unmask_irq <-handle_level_irq
+  <idle>-0       0dN.h3..   33us+: _raw_spin_unlock <-generic_handle_irq
+  <idle>-0       0dN.h3..   35us+: sub_preempt_count <-_raw_spin_unlock
+  <idle>-0       0dN.h2..   37us+: irq_exit <-handle_IRQ
+  <idle>-0       0dN.h2..   39us+: sub_preempt_count <-irq_exit
+  <idle>-0       0dN..3..   42us+: idle_cpu <-irq_exit
+  <idle>-0       0dN..3..   44us+: rcu_irq_exit <-irq_exit
+  <idle>-0       0dN..3..   46us+: rcu_eqs_enter_common.isra.32 <-rcu_irq_exit
+  <idle>-0       0dN..3..   48us+: sub_preempt_count <-handle_IRQ
+  <idle>-0       0.N..2..   51us+: ledtrig_cpu <-cpu_idle
+  <idle>-0       0.N..2..   53us+: led_trigger_event <-cpu_idle
+  <idle>-0       0.N..2..   55us+: migrate_disable <-led_trigger_event
+  <idle>-0       0.N..2..   57us+: rt_read_lock <-led_trigger_event
+  <idle>-0       0.N..2..   59us+: __rt_spin_lock <-rt_read_lock
+  <idle>-0       0.N..2..   61us+: rt_spin_lock_slowlock <-rt_read_lock
+  <idle>-0       0.N..2..   63us+: _raw_spin_lock <-rt_spin_lock_slowlock

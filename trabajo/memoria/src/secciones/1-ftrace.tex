@@ -1,0 +1,31 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{La herramienta Ftrace}
+
+En este apartado se describe de forma breve la herramienta Ftrace, así como algunas de sus características sobre las que se ha aprendido. 
+
+También se comentan brevemente algunas de las pruebas que se hicieron en una máquina virtual como primera toma de contacto.
+
+%----------------------------------------------------------------------------------
+\subsection{Qué es y cómo funciona}
+
+Ftrace es una herramienta que permite obtener trazas de la ejecución de ciertas actividades en un núcleo Linux. Empezó siendo un tracer independiente para funciones del kernel, pero con el tiempo ha acabado formando parte de él. Además del \it{function tracer}, cuenta con otras muchas utilidades de tracing, por lo que en la documentación de la última versión de Linux \cite{documentacion-ftrace-Linux} es definido como un framework para tracing en el kernel.
+
+Entre otras cosas, permite hacer tracing estático basado en tracepoints (son macros en el código que hacen log de ciertos eventos, sin interrumpir la ejecución de la función en la que se ejecutan) y tracing dinámico usando kprobes (reemplazan o añaden en ciertos puntos del kernel instrucciones de salto a rutinas en las que se llevan a cabo diferentes acciones de tracing). Con ello se puede depurar el kernel, monitorizar eventos, hacer profiling, medir latencias de ciertas actividades, etc. 
+
+Su funcionamiento interno, de forma muy simplificada, se basa en el registro de los eventos de los que se está haciendo tracing en una estructura de datos del kernel llamada \it{ring buffer}, que opera a modo de cola circular. Toda la interacción con el subsistema de tracing queda expuesta al administrador/usuario del sistema a través de un pseudosistema de ficheros, llamado \it{tracefs}, que debe ser montado bajo \it{/sys/kernel/debug/tracing}. A través de sus ficheros se puede configurar y consultar la actividad de tracing que se esté realizando en el núcleo. 
+
+Tal y como se comentaba, Ftrace dispone de muchas utilidades de tracing, llamadas tracers o plugins, que a partir de ciertos eventos obtienen métricas de los mismos o llevan a cabo algún procesamiento con ellos. Para que estén disponibles en tiempo de ejecución, su código debe haberse compilado como parte del kernel. Éste se encuentra siempre precedido por directivas de compilación condicional, de tal forma si en la configuración del kernel se especifica que ciertos tracers se generen, durante la compilación se definirán las macros necesarias para que el preprocesador de C incluya ese código en el build de Linux.
+
+%----------------------------------------------------------------------------------
+\subsection{Primeras pruebas en una máquina virtual Debian}
+
+La primera aproximación que se hizo a Ftrace fue usando una máquina virtual Debian, ya que aunque se disponía de Ubuntu instalado en distintos ordenadores, el miedo a causar daños en el sistema hizo que se optase por la opción de la virtualización.
+
+En ella se realizaron algunas pruebas sencillas (por ejemplo, programas en C que realizaban las llamadas al sistema \it{write} y \it{read}), de las cuales se obtuvo una traza usando directamente Ftrace a través del sistema de ficheros.
+
+Fue entonces cuando se vio que esa forma de trabajar con la herramienta resultaba muy tediosa a la hora de realizar pruebas, por lo que desde ese momento se empezó a usar la utilidad \it{trace-cmd}.
+
+\end{document}

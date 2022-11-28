@@ -1,0 +1,50 @@
+ stress-ng-sleep-2994  [000]  5290.979926: sched_wakeup:         comm=stress-ng-sleep pid=3030 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-2994  [000]  5290.979941: sched_wakeup:         comm=stress-ng-sleep pid=3013 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-2994  [000]  5290.979964: sched_switch:         prev_comm=stress-ng-sleep prev_pid=2994 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3030 next_prio=120 Latency: 37.583 usecs
+ stress-ng-sleep-3030  [000]  5290.980018: sched_wakeup:         comm=stress-ng-sleep pid=2996 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-3030  [000]  5290.980030: sched_wakeup:         comm=stress-ng-sleep pid=3032 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-3030  [000]  5290.980042: sched_wakeup:         comm=stress-ng-sleep pid=3024 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-3030  [000]  5290.980055: sched_wakeup:         comm=ksoftirqd/0 pid=3 prio=98 success=1 target_cpu=000
+ stress-ng-sleep-3030  [000]  5290.980065: sched_switch:         prev_comm=stress-ng-sleep prev_pid=3030 prev_prio=120 prev_state=R ==> next_comm=ksoftirqd/0 next_pid=3 next_prio=98 Latency: 10.083 usecs
+     ksoftirqd/0-3     [000]  5290.980096: sched_switch:         prev_comm=ksoftirqd/0 prev_pid=3 prev_prio=98 prev_state=S ==> next_comm=flush-179:0 next_pid=93 next_prio=120
+     flush-179:0-93    [000]  5290.980118: sched_wakeup:         comm=stress-ng-sleep pid=2994 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980132: sched_wakeup:         comm=stress-ng-sleep pid=3011 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980176: sched_wakeup:         comm=stress-ng-sleep pid=3028 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980295: sched_wakeup:         comm=stress-ng-sleep pid=3015 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980364: sched_wakeup:         comm=stress-ng-sleep pid=3019 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980427: sched_wakeup:         comm=stress-ng-sleep pid=3000 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980503: sched_wakeup:         comm=stress-ng-sleep pid=3021 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980518: sched_wakeup:         comm=stress-ng-sleep pid=3018 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980594: sched_wakeup:         comm=stress-ng-sleep pid=3008 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980607: sched_wakeup:         comm=stress-ng-sleep pid=3033 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980659: sched_wakeup:         comm=stress-ng-sleep pid=3016 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980673: sched_wakeup:         comm=stress-ng-sleep pid=3005 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980685: sched_wakeup:         comm=stress-ng-sleep pid=2999 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980755: sched_wakeup:         comm=stress-ng-sleep pid=3017 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980768: sched_wakeup:         comm=stress-ng-sleep pid=3020 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980896: sched_wakeup:         comm=stress-ng-sleep pid=3026 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.980954: sched_wakeup:         comm=stress-ng-sleep pid=3009 prio=120 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.981967: sched_wakeup:         comm=ksoftirqd/0 pid=3 prio=98 success=1 target_cpu=000
+     flush-179:0-93    [000]  5290.981983: sched_switch:         prev_comm=flush-179:0 prev_pid=93 prev_prio=120 prev_state=R+ ==> next_comm=ksoftirqd/0 next_pid=3 next_prio=98 Latency: 16.167 usecs
+     ksoftirqd/0-3     [000]  5290.982018: sched_switch:         prev_comm=ksoftirqd/0 prev_pid=3 prev_prio=98 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3013 next_prio=120 Latency: 2077.250 usecs
+ stress-ng-sleep-3013  [000]  5290.982066: sched_switch:         prev_comm=stress-ng-sleep prev_pid=3013 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3032 next_prio=120 Latency: 2035.292 usecs
+ stress-ng-sleep-3032  [000]  5290.982100: sched_switch:         prev_comm=stress-ng-sleep prev_pid=3032 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3011 next_prio=120 Latency: 1967.750 usecs
+ stress-ng-sleep-3011  [000]  5290.982125: sched_wakeup:         comm=stress-ng-sleep pid=3013 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-3011  [000]  5290.982137: sched_wakeup:         comm=stress-ng-sleep pid=3032 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-3011  [000]  5290.982172: sched_switch:         prev_comm=stress-ng-sleep prev_pid=3011 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3028 next_prio=120 Latency: 1996.042 usecs
+ stress-ng-sleep-3028  [000]  5290.982205: sched_switch:         prev_comm=stress-ng-sleep prev_pid=3028 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3000 next_prio=120 Latency: 1778.042 usecs
+ stress-ng-sleep-3000  [000]  5290.982228: sched_wakeup:         comm=stress-ng-sleep pid=3011 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-3000  [000]  5290.982239: sched_wakeup:         comm=stress-ng-sleep pid=3028 prio=120 success=1 target_cpu=000
+ stress-ng-sleep-3000  [000]  5290.982270: sched_switch:         prev_comm=stress-ng-sleep prev_pid=3000 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3021 next_prio=120 Latency: 1767.750 usecs
+ stress-ng-sleep-3021  [000]  5290.982299: sched_switch:         prev_comm=stress-ng-sleep prev_pid=3021 prev_prio=120 prev_state=S ==> next_comm=stress-ng-sleep next_pid=3018 next_prio=120 Latency: 1781.750 usecs
+
+Average wakeup latency: 423.070 usecs
+Maximum Latency: 10837.500 usecs at timestamp: 5285.653542
+Minimum Latency: 7.000 usecs at timestamp: 5282.804239
+
+RT task timings:
+
+Average wakeup latency: 14.035 usecs
+Maximum Latency: 80.834 usecs at timestamp: 5288.190995
+Minimum Latency: 7.000 usecs at timestamp: 5282.804239
+

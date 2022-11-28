@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 1567 us, #719/719, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: ksoftirqd/0-3 (uid:0 nice:0 policy:1 rt_prio:1)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+  <idle>-0       0dN..6..    2us+:      0:120:R   + [000]     3: 98:R ksoftirqd/0
+  <idle>-0       0dN..6..    6us+: 0
+  <idle>-0       0.N..2..   12us+: __rcu_read_lock <-set_cpu_sd_state_idle
+  <idle>-0       0.N..2..   14us+: __rcu_read_unlock <-tick_nohz_idle_enter
+  <idle>-0       0dN..2..   17us+: __tick_nohz_idle_enter <-tick_nohz_idle_enter
+  <idle>-0       0dN..2..   19us+: ktime_get <-__tick_nohz_idle_enter
+  <idle>-0       0dN..2..   21us+: clocksource_read_cycles <-ktime_get
+  <idle>-0       0.N..2..   24us+: rcu_idle_enter <-cpu_idle
+  <idle>-0       0dN..2..   26us+: rcu_eqs_enter_common.isra.32 <-rcu_idle_enter
+  <idle>-0       0.N..2..   29us+: ledtrig_cpu <-cpu_idle
+  <idle>-0       0.N..2..   31us+: led_trigger_event <-cpu_idle
+  <idle>-0       0.N..2..   34us+: migrate_disable <-led_trigger_event
+  <idle>-0       0.N..2..   35us+: rt_read_lock <-led_trigger_event
+  <idle>-0       0.N..2..   38us+: __rt_spin_lock <-rt_read_lock
+  <idle>-0       0.N..2..   40us+: rt_spin_lock_slowlock <-rt_read_lock
+  <idle>-0       0.N..2..   42us+: _raw_spin_lock <-rt_spin_lock_slowlock
+  <idle>-0       0.N..2..   44us+: add_preempt_count <-_raw_spin_lock
+  <idle>-0       0.N..3..   46us+: __try_to_take_rt_mutex <-rt_spin_lock_slowlock
+  <idle>-0       0.N..3..   48us+: _raw_spin_unlock <-rt_spin_lock_slowlock
+  <idle>-0       0.N..3..   51us+: sub_preempt_count <-_raw_spin_unlock
+  <idle>-0       0.N..2..   53us+: led_set_brightness <-led_trigger_event
+  <idle>-0       0.N..2..   55us+: gpio_led_set <-led_trigger_event
+  <idle>-0       0.N..2..   58us+: __gpio_set_value <-led_trigger_event
+  <idle>-0       0.N..2..   60us+: gpio_set <-led_trigger_event
+  <idle>-0       0.N..2..   62us+: migrate_disable <-gpio_set
+  <idle>-0       0.N..2..   64us+: rt_spin_lock <-gpio_set
+  <idle>-0       0.N..2..   66us+: rt_spin_lock_slowlock <-gpio_set
+  <idle>-0       0.N..2..   68us+: _raw_spin_lock <-rt_spin_lock_slowlock
+  <idle>-0       0.N..2..   70us+: add_preempt_count <-_raw_spin_lock

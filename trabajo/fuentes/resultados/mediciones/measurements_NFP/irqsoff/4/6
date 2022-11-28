@@ -1,0 +1,50 @@
+cpus=1
+# tracer: irqsoff
+#
+# irqsoff latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 627 us, #338/338, CPU#0 | (M:server VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: swapper/0-0 (uid:0 nice:0 policy:0 rt_prio:0)
+#    -----------------
+#  => started at: __irq_svc
+#  => ended at:   __irq_svc
+#
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+  <idle>-0       0d......    1us+: __irq_svc
+  <idle>-0       0d......    3us+: irq_find_mapping <-omap3_intc_handle_irq
+  <idle>-0       0d......    5us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+  <idle>-0       0d......    7us+: handle_IRQ <-omap3_intc_handle_irq
+  <idle>-0       0d......    8us+: irq_enter <-handle_IRQ
+  <idle>-0       0d......   10us+: rcu_irq_enter <-irq_enter
+  <idle>-0       0d......   12us+: rcu_eqs_exit_common.isra.39 <-rcu_irq_enter
+  <idle>-0       0d......   14us+: local_bh_disable <-irq_enter
+  <idle>-0       0d......   15us+: __local_bh_disable <-irq_enter
+  <idle>-0       0d..s...   17us+: tick_check_idle <-irq_enter
+  <idle>-0       0d..s...   19us+: tick_check_oneshot_broadcast <-tick_check_idle
+  <idle>-0       0d..s...   21us+: ktime_get <-tick_check_idle
+  <idle>-0       0d..s...   23us+: clocksource_read_cycles <-ktime_get
+  <idle>-0       0d..s...   25us+: update_ts_time_stats <-tick_check_idle
+  <idle>-0       0d..s...   26us+: nr_iowait_cpu <-update_ts_time_stats
+  <idle>-0       0d..s...   28us+: tick_do_update_jiffies64 <-tick_check_idle
+  <idle>-0       0d..s...   30us+: touch_softlockup_watchdog <-irq_enter
+  <idle>-0       0d..s...   32us+: _local_bh_enable <-irq_enter
+  <idle>-0       0d..s...   34us+: __local_bh_enable <-irq_enter
+  <idle>-0       0d..h...   36us+: generic_handle_irq <-handle_IRQ
+  <idle>-0       0d..h...   37us+: irq_to_desc <-generic_handle_irq
+  <idle>-0       0d..h...   39us+: handle_level_irq <-generic_handle_irq
+  <idle>-0       0d..h...   41us+: _raw_spin_lock <-handle_level_irq
+  <idle>-0       0d..h...   43us+: irq_gc_mask_disable_reg <-handle_level_irq
+  <idle>-0       0d..h...   44us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+  <idle>-0       0d..h...   46us+: _raw_spin_unlock <-handle_level_irq

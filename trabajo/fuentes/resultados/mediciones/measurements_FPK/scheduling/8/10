@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 731 us, #324/324, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: ksoftirqd/0-3 (uid:0 nice:0 policy:1 rt_prio:1)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+  <idle>-0       0d...5..    1us+:      0:120:R   + [000]     3: 98:R ksoftirqd/0
+  <idle>-0       0d...5..    4us+: 0
+  <idle>-0       0d...5..    6us+: check_preempt_curr <-ttwu_do_wakeup
+  <idle>-0       0d...5..    9us+: resched_task <-check_preempt_curr
+  <idle>-0       0dN..5..   11us+: task_woken_rt <-ttwu_do_wakeup
+  <idle>-0       0dN..5..   13us+: _raw_spin_unlock <-try_to_wake_up
+  <idle>-0       0dN..5..   15us+: sub_preempt_count <-_raw_spin_unlock
+  <idle>-0       0dN..4..   17us+: ttwu_stat <-try_to_wake_up
+  <idle>-0       0dN..4..   20us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+  <idle>-0       0dN..4..   22us+: sub_preempt_count <-_raw_spin_unlock_irqrestore
+  <idle>-0       0dN..3..   24us+: idle_cpu <-irq_exit
+  <idle>-0       0dN..3..   26us+: rcu_irq_exit <-irq_exit
+  <idle>-0       0dN..3..   29us+: rcu_eqs_enter_common.isra.32 <-rcu_irq_exit
+  <idle>-0       0dN..3..   31us+: sub_preempt_count <-handle_IRQ
+  <idle>-0       0dN..2..   33us+: irq_find_mapping <-omap3_intc_handle_irq
+  <idle>-0       0dN..2..   35us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+  <idle>-0       0dN..2..   37us+: handle_IRQ <-omap3_intc_handle_irq
+  <idle>-0       0dN..2..   39us+: irq_enter <-handle_IRQ
+  <idle>-0       0dN..2..   41us+: rcu_irq_enter <-irq_enter
+  <idle>-0       0dN..2..   44us+: rcu_eqs_exit_common.isra.33 <-rcu_irq_enter
+  <idle>-0       0dN..2..   46us+: tick_check_idle <-irq_enter
+  <idle>-0       0dN..2..   48us+: tick_check_oneshot_broadcast <-tick_check_idle
+  <idle>-0       0dN..2..   50us+: add_preempt_count <-irq_enter
+  <idle>-0       0dN.h2..   52us+: generic_handle_irq <-handle_IRQ
+  <idle>-0       0dN.h2..   54us+: irq_to_desc <-generic_handle_irq
+  <idle>-0       0dN.h2..   56us+: handle_level_irq <-generic_handle_irq
+  <idle>-0       0dN.h2..   58us+: _raw_spin_lock <-handle_level_irq
+  <idle>-0       0dN.h2..   60us+: add_preempt_count <-_raw_spin_lock
+  <idle>-0       0dN.h3..   63us+: irq_gc_mask_disable_reg <-handle_level_irq

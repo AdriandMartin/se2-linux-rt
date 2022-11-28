@@ -1,0 +1,50 @@
+cpus=1
+# tracer: irqsoff
+#
+# irqsoff latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 941 us, #488/488, CPU#0 | (M:server VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: stress-ng-sleep-2832 (uid:0 nice:0 policy:0 rt_prio:0)
+#    -----------------
+#  => started at: __irq_svc
+#  => ended at:   __do_softirq
+#
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+stress-n-2832    0d......    1us+: __irq_svc
+stress-n-2832    0d......    3us+: irq_find_mapping <-omap3_intc_handle_irq
+stress-n-2832    0d......    5us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+stress-n-2832    0d......    7us+: handle_IRQ <-omap3_intc_handle_irq
+stress-n-2832    0d......    8us+: irq_enter <-handle_IRQ
+stress-n-2832    0d......   11us+: rcu_irq_enter <-irq_enter
+stress-n-2832    0d..h...   14us+: generic_handle_irq <-handle_IRQ
+stress-n-2832    0d..h...   16us+: irq_to_desc <-generic_handle_irq
+stress-n-2832    0d..h...   18us+: handle_level_irq <-generic_handle_irq
+stress-n-2832    0d..h...   20us+: _raw_spin_lock <-handle_level_irq
+stress-n-2832    0d..h...   22us+: irq_gc_mask_disable_reg <-handle_level_irq
+stress-n-2832    0d..h...   23us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+stress-n-2832    0d..h...   25us+: _raw_spin_unlock <-handle_level_irq
+stress-n-2832    0d..h...   27us+: omap_mask_ack_irq <-handle_level_irq
+stress-n-2832    0d..h...   29us+: irq_gc_mask_disable_reg <-omap_mask_ack_irq
+stress-n-2832    0d..h...   31us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+stress-n-2832    0d..h...   32us+: _raw_spin_unlock <-omap_mask_ack_irq
+stress-n-2832    0d..h...   35us+: handle_irq_event <-handle_level_irq
+stress-n-2832    0d..h...   36us+: _raw_spin_unlock <-handle_irq_event
+stress-n-2832    0d..h...   39us+: handle_irq_event_percpu <-handle_irq_event
+stress-n-2832    0d..h...   40us+: omap2_gp_timer_interrupt <-handle_irq_event_percpu
+stress-n-2832    0d..h...   42us+: hrtimer_interrupt <-omap2_gp_timer_interrupt
+stress-n-2832    0d..h...   44us+: _raw_spin_lock <-hrtimer_interrupt
+stress-n-2832    0d..h...   46us+: ktime_get_update_offsets <-hrtimer_interrupt
+stress-n-2832    0d..h...   48us+: clocksource_read_cycles <-ktime_get_update_offsets
+stress-n-2832    0d..h...   51us+: __run_hrtimer <-hrtimer_interrupt

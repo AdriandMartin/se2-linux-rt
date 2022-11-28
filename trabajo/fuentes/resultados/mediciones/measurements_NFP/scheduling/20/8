@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 744 us, #357/357, CPU#0 | (M:server VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: watchdog/0-11 (uid:0 nice:0 policy:1 rt_prio:99)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+  <idle>-0       0dN.h...    5us+:      0:120:R   + [000]    11:  0:R watchdog/0
+  <idle>-0       0dN.h...   17us+: 0
+  <idle>-0       0dN.h...   20us+: check_preempt_curr <-ttwu_do_wakeup
+  <idle>-0       0dN.h...   22us+: resched_task <-check_preempt_curr
+  <idle>-0       0dN.h...   24us+: task_woken_rt <-ttwu_do_wakeup
+  <idle>-0       0dN.h...   26us+: _raw_spin_unlock <-try_to_wake_up
+  <idle>-0       0dN.h...   28us+: ttwu_stat <-try_to_wake_up
+  <idle>-0       0dN.h...   31us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+  <idle>-0       0dN.h...   33us+: ktime_get <-watchdog_timer_fn
+  <idle>-0       0dN.h...   34us+: clocksource_read_cycles <-ktime_get
+  <idle>-0       0dN.h...   37us+: hrtimer_forward <-watchdog_timer_fn
+  <idle>-0       0dN.h...   39us+: ktime_add_safe <-hrtimer_forward
+  <idle>-0       0dN.h...   41us+: ktime_add_safe <-hrtimer_forward
+  <idle>-0       0dN.h...   43us+: __touch_watchdog <-watchdog_timer_fn
+  <idle>-0       0dN.h...   46us+: _raw_spin_lock <-__run_hrtimer
+  <idle>-0       0dN.h...   48us+: enqueue_hrtimer <-__run_hrtimer
+  <idle>-0       0dN.h...   50us+: __run_hrtimer <-hrtimer_interrupt
+  <idle>-0       0dN.h...   52us+: __remove_hrtimer <-__run_hrtimer
+  <idle>-0       0dN.h...   54us+: _raw_spin_unlock <-__run_hrtimer
+  <idle>-0       0dN.h...   56us+: hrtimer_wakeup <-__run_hrtimer
+  <idle>-0       0dN.h...   58us+: wake_up_process <-hrtimer_wakeup
+  <idle>-0       0dN.h...   60us+: try_to_wake_up <-hrtimer_wakeup
+  <idle>-0       0dN.h...   62us+: _raw_spin_lock_irqsave <-try_to_wake_up
+  <idle>-0       0dN.h...   64us+: task_waking_fair <-try_to_wake_up
+  <idle>-0       0dN.h...   66us+: select_task_rq_fair <-try_to_wake_up
+  <idle>-0       0dN.h...   68us+: cpus_share_cache <-try_to_wake_up
+  <idle>-0       0dN.h...   70us+: _raw_spin_lock <-try_to_wake_up
+  <idle>-0       0dN.h...   72us+: ttwu_do_activate.constprop.81 <-try_to_wake_up
+  <idle>-0       0dN.h...   74us+: activate_task <-ttwu_do_activate.constprop.81

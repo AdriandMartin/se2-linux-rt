@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 427 us, #4294967018/4294967018, CPU#0 | (M:server VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: watchdog/0-11 (uid:0 nice:0 policy:1 rt_prio:99)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+stress-n-469     0d..h...    2us+:    469:120:R   + [000]    11:  0:R watchdog/0
+stress-n-469     0d..h...    9us+: 0
+stress-n-469     0d..h...   12us+: check_preempt_curr <-ttwu_do_wakeup
+stress-n-469     0d..h...   14us+: resched_task <-check_preempt_curr
+stress-n-469     0dN.h...   16us+: task_woken_rt <-ttwu_do_wakeup
+stress-n-469     0dN.h...   18us+: _raw_spin_unlock <-try_to_wake_up
+stress-n-469     0dN.h...   20us+: ttwu_stat <-try_to_wake_up
+stress-n-469     0dN.h...   22us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+stress-n-469     0dN.h...   24us+: ktime_get <-watchdog_timer_fn
+stress-n-469     0dN.h...   26us+: clocksource_read_cycles <-ktime_get
+stress-n-469     0dN.h...   29us+: hrtimer_forward <-watchdog_timer_fn
+stress-n-469     0dN.h...   30us+: ktime_add_safe <-hrtimer_forward
+stress-n-469     0dN.h...   32us+: ktime_add_safe <-hrtimer_forward
+stress-n-469     0dN.h...   34us+: __touch_watchdog <-watchdog_timer_fn
+stress-n-469     0dN.h...   37us+: _raw_spin_lock <-__run_hrtimer
+stress-n-469     0dN.h...   39us+: enqueue_hrtimer <-__run_hrtimer
+stress-n-469     0dN.h...   41us+: __run_hrtimer <-hrtimer_interrupt
+stress-n-469     0dN.h...   43us+: __remove_hrtimer <-__run_hrtimer
+stress-n-469     0dN.h...   45us+: _raw_spin_unlock <-__run_hrtimer
+stress-n-469     0dN.h...   47us+: tick_sched_timer <-__run_hrtimer
+stress-n-469     0dN.h...   54us+: ktime_get <-tick_sched_timer
+stress-n-469     0dN.h...   56us+: clocksource_read_cycles <-ktime_get
+stress-n-469     0dN.h...   58us+: tick_sched_do_timer <-tick_sched_timer
+stress-n-469     0dN.h...   60us+: tick_do_update_jiffies64 <-tick_sched_timer
+stress-n-469     0dN.h...   62us+: _raw_spin_lock <-tick_do_update_jiffies64
+stress-n-469     0dN.h...   64us+: do_timer <-tick_do_update_jiffies64
+stress-n-469     0dN.h...   66us+: _raw_spin_lock_irqsave <-do_timer
+stress-n-469     0dN.h...   68us+: clocksource_read_cycles <-do_timer
+stress-n-469     0dN.h...   70us+: ntp_tick_length <-do_timer

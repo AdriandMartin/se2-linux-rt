@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 525 us, #4294966972/4294966972, CPU#0 | (M:server VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: kworker/0:1H-72 (uid:0 nice:-20 policy:0 rt_prio:0)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+ mmcqd/0-71      0d......    4us+:     71:120:R   + [000]    72:100:R kworker/0:1H
+ mmcqd/0-71      0d......   14us+: 0
+ mmcqd/0-71      0d......   18us+: check_preempt_curr <-ttwu_do_wakeup
+ mmcqd/0-71      0d......   20us+: check_preempt_wakeup <-check_preempt_curr
+ mmcqd/0-71      0d......   22us+: update_curr <-check_preempt_wakeup
+ mmcqd/0-71      0d......   24us+: wakeup_preempt_entity <-check_preempt_wakeup
+ mmcqd/0-71      0d......   27us+: calc_delta_mine <-wakeup_preempt_entity
+ mmcqd/0-71      0d......   29us+: set_next_buddy <-check_preempt_wakeup
+ mmcqd/0-71      0d......   32us+: resched_task <-check_preempt_wakeup
+ mmcqd/0-71      0dN.....   34us+: _raw_spin_unlock <-try_to_wake_up
+ mmcqd/0-71      0dN.....   36us+: ttwu_stat <-try_to_wake_up
+ mmcqd/0-71      0dN.....   39us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+ mmcqd/0-71      0dN.....   41us+: _raw_spin_unlock <-queue_work_on
+ mmcqd/0-71      0dN.....   44us+: elv_put_request <-__blk_put_request
+ mmcqd/0-71      0dN.....   46us+: cfq_put_request <-__blk_put_request
+ mmcqd/0-71      0dN.....   49us+: cfq_put_queue <-__blk_put_request
+ mmcqd/0-71      0dN.....   51us+: put_io_context <-__blk_put_request
+ mmcqd/0-71      0dN.....   53us+: mempool_free <-__blk_put_request
+ mmcqd/0-71      0dN.....   55us+: mempool_free_slab <-__blk_put_request
+ mmcqd/0-71      0dN.....   57us+: kmem_cache_free <-__blk_put_request
+ mmcqd/0-71      0dN.....   60us+: unlock_slab_and_free_delayed <-kmem_cache_free
+ mmcqd/0-71      0dN.....   62us+: free_delayed <-unlock_slab_and_free_delayed
+ mmcqd/0-71      0dN.....   64us+: freed_request <-__blk_put_request
+ mmcqd/0-71      0dN.....   67us+: __freed_request <-freed_request
+ mmcqd/0-71      0dN.....   69us+: clear_bdi_congested <-__freed_request
+ mmcqd/0-71      0dN.....   73us+: _raw_spin_unlock_irqrestore <-blk_end_bidi_request
+ mmcqd/0-71      0dN.....   75us+: irq_find_mapping <-omap3_intc_handle_irq
+ mmcqd/0-71      0dN.....   77us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+ mmcqd/0-71      0dN.....   79us+: handle_IRQ <-omap3_intc_handle_irq

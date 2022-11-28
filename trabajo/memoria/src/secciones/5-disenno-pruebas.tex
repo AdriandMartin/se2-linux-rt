@@ -1,0 +1,62 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Diseño de las pruebas}
+
+En este apartado se resume el diseño de las pruebas realizadas.
+
+Se recogen aquí, por lo tanto, solo las explicaciones principales del funcionamiento y la elección de los comandos finalmente utilizados.
+
+%----------------------------------------------------------------------------------
+\subsection{Construcción de scripts para las pruebas}
+
+Durante la construcción de los scripts han resultado de gran utilidad las páginas del \it{man} de ambas herramientas, especialmente las de \it{trace-cmd}, pues en ellas hay multitud de ejemplos de mediciones de latencias que han servido de manera directa en la implementación de las pruebas realizadas.
+
+Dadas las características de la placa, se ha tratado de controlar en todo momento la carga de trabajo a la que se la sometía, con el fin de evitar posibles daños debido a un exceso de temperatura. Hay que destacar que las pruebas que aquí se describen se realizaron en el mes de enero, en una habitación refrigerada y durante la noche.
+
+Cada experimento con los scripts entregados se realiza un total de diez veces, pero ese número es configurable cambiando el valor de una variable.
+
+Todos los scripts que se adjuntan siguen la misma estructura, y tan solo cambia entre ellos el tipo de \it{stressor} y la forma de utilización de la herramienta \it{trace-cmd}.
+
+%--------------------------------------------------------------
+\subsubsection{Latencia de planificación}
+
+En el caso de la latencia de planificación, se han realizado dos mediciones separadas sobre la misma configuración de carga de trabajo: en la prueba cuyo nombre se precede de "-w" se han usado filtros sobre los eventos relativos a planificación, mientras que en la otra se ha utilizado directamente el tracer \it{wakeup}. El motivo es que en distintos experimentos se pudo comprobar que el resultado que se obtenía de esas formas era lo suficientemente diferente como para considerar el realizar pruebas por separado.
+
+En lo que respecta al stressor, se ha elegido \it{--sleep N --sleep-max P"} porque se ha visto que realmente tiene impacto en la latencia de planificación experimentalmente. Su principal ventaja con respecto al resto es que crea threads y no procesos (a diferencia de otros stressors como \it{fork} o \it{sem}). Esto permite generar muchas más unidades planificables con los mismos recursos. Dichos threads se despiertan en un tiempo aleatorio, lo cual genera muchos cambios de contexto.
+
+%--------------------------------------------------------------
+\subsubsection{Tiempo máximo de interrupciones inhibidas}
+
+En este caso, se ha utilizado directamente el tracer llamado \it{irqsoff}, que reporta directamente el valor requerido.
+
+En cuanto al stressor, se elige \it{--sleep N --sleep-max P"} porque empíricamente se ha visto que realmente repercute en el tiempo que las interrupciones están desactivadas. \it{Sleep} hace lo que \it{timer}, pero lanzando P threads de sistema por worker, por lo que \it{timer N} equivale a \it{sleep N P=1}. No obstante, \it{sleep} genera mucha más carga con menos coste en memoria, porque son threads, y hacer lo mismo con \it{timer} supone crear $P*N$ procesos, lo cual supone una sobrecarga excesiva que la placa no es capaz de soportar.
+
+%--------------------------------------------------------------
+\subsubsection{Latencia de llamada al sistema}
+
+Para medir la latencia de las llamadas al sistema, se han utilizado filtros sobre los eventos \it{sys\_enter\_NOMBRE-SC} y \it{sys\_exit\_NOMBRE-SC}.
+
+Se ha elegido el stressor \it{tee} porque utiliza tanto \it{write} como \it{read}, y lo hace sobre \it{file descriptors} virtuales, por lo que no supone una sobrecarga innecesaria para la placa debida a la utilización de ficheros físicos.
+
+%----------------------------------------------------------------------------------
+\subsection{Extracción de resultados de las trazas}
+
+Una vez con los ficheros de las trazas de la ejecución de cada una de las pruebas, era necesario extraer de ellos los valores de latencia concretos.
+
+Debido a la baja potencia computacional de la placa, durante la ejecución de las pruebas se ha limitado el trabajo a volcar la traza de las mismas en ficheros, que luego serían analizados en una máquina con mayores recursos. El motivo es análogo al que se mencionaba en la sección anterior, ya que a toda costa se ha evitado sobrecargar la beaglebone.
+
+Para llevar a cabo la extracción, se han creado scripts de shell que se encargan de agregar los valores presentes en los ficheros de traza y llevar a cabo ciertos cálculos con ellos.
+
+En primer lugar, está \it{extract\_latencies.sh}, que sirve para extraer los valores de latencia en aquellas trazas generadas por los tracers \it{irqsoff} y \it{wakeup}. Como se puede ver, lleva a cabo un procesamiento sencillo basado en utilidades que funcionan a modo de filtros sucesivos sobre el contenido de las líneas que se analizan.
+
+En el caso de las trazas obtenidas mediante filtros sobre los eventos, se distinguen dos casos:
+\begin{itemize}
+    \item En las trazas de las pruebas relativas a las llamadas al sistema, es necesario llevar a cabo un preprocesamiento antes de proceder a la extracción de las latencias. El script \it{obtain\_latencies.sh} lleva a cabo un parsing de las trazas, emparejando cada evento de tipo \it{enter} con su correspondiente de tipo \it{exit}, y calculando entonces el tiempo transcurrido entre sus respectivos timestamps.
+    \item En las trazas de las pruebas denominadas como "scheduling-w", el procesamiento es más sencillo, porque todas ellas terminan con un resumen en el que se da una medición en promedio de la latencia de planificación, por lo que con el script \it{extract\_latency.sh} dicho valor se extrae mediante utilidades de shell.
+\end{itemize}
+
+Los valores obtenidos se han copiado en hojas de cálculo (que también se adjuntan), y que han servido para elaborar los resultados que se presentan en el siguiente apartado.
+
+\end{document}

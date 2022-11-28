@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 1184 us, #4294937744/4294937744, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: ksoftirqd/0-3 (uid:0 nice:0 policy:1 rt_prio:1)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+  <idle>-0       0d...5..    1us+:      0:120:R   + [000]     3: 98:R ksoftirqd/0
+  <idle>-0       0d...5..    5us+: 0
+  <idle>-0       0d...5..    7us+: check_preempt_curr <-ttwu_do_wakeup
+  <idle>-0       0d...5..    9us+: resched_task <-check_preempt_curr
+  <idle>-0       0dN..5..   12us+: task_woken_rt <-ttwu_do_wakeup
+  <idle>-0       0dN..5..   14us+: _raw_spin_unlock <-try_to_wake_up
+  <idle>-0       0dN..5..   16us+: sub_preempt_count <-_raw_spin_unlock
+  <idle>-0       0dN..4..   19us+: ttwu_stat <-try_to_wake_up
+  <idle>-0       0dN..4..   21us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+  <idle>-0       0dN..4..   23us+: sub_preempt_count <-_raw_spin_unlock_irqrestore
+  <idle>-0       0dN..3..   25us+: idle_cpu <-irq_exit
+  <idle>-0       0dN..3..   27us+: rcu_irq_exit <-irq_exit
+  <idle>-0       0dN..3..   30us+: sub_preempt_count <-handle_IRQ
+  <idle>-0       0.N..2..   32us+: __rcu_read_unlock <-tick_nohz_idle_enter
+  <idle>-0       0dN..2..   35us+: __tick_nohz_idle_enter <-tick_nohz_idle_enter
+  <idle>-0       0dN..2..   37us+: ktime_get <-__tick_nohz_idle_enter
+  <idle>-0       0dN..2..   39us+: clocksource_read_cycles <-ktime_get
+  <idle>-0       0dN..2..   42us+: irq_find_mapping <-omap3_intc_handle_irq
+  <idle>-0       0dN..2..   44us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+  <idle>-0       0dN..2..   46us+: handle_IRQ <-omap3_intc_handle_irq
+  <idle>-0       0dN..2..   48us+: irq_enter <-handle_IRQ
+  <idle>-0       0dN..2..   50us+: rcu_irq_enter <-irq_enter
+  <idle>-0       0dN..2..   52us+: tick_check_idle <-irq_enter
+  <idle>-0       0dN..2..   54us+: tick_check_oneshot_broadcast <-tick_check_idle
+  <idle>-0       0dN..2..   56us+: ktime_get <-tick_check_idle
+  <idle>-0       0dN..2..   58us+: clocksource_read_cycles <-ktime_get
+  <idle>-0       0dN..2..   61us+: update_ts_time_stats <-tick_check_idle
+  <idle>-0       0dN..2..   63us+: nr_iowait_cpu <-update_ts_time_stats
+  <idle>-0       0dN..2..   65us+: add_preempt_count <-irq_enter

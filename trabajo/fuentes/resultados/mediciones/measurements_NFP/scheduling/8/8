@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 344 us, #4294967207/4294967207, CPU#0 | (M:server VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: watchdog/0-11 (uid:0 nice:0 policy:1 rt_prio:99)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+  <idle>-0       0dN.h...    2us+:      0:120:R   + [000]    11:  0:R watchdog/0
+  <idle>-0       0dN.h...   10us+: 0
+  <idle>-0       0dN.h...   12us+: check_preempt_curr <-ttwu_do_wakeup
+  <idle>-0       0dN.h...   15us+: resched_task <-check_preempt_curr
+  <idle>-0       0dN.h...   17us+: task_woken_rt <-ttwu_do_wakeup
+  <idle>-0       0dN.h...   19us+: _raw_spin_unlock <-try_to_wake_up
+  <idle>-0       0dN.h...   21us+: ttwu_stat <-try_to_wake_up
+  <idle>-0       0dN.h...   23us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+  <idle>-0       0dN.h...   25us+: ktime_get <-watchdog_timer_fn
+  <idle>-0       0dN.h...   27us+: clocksource_read_cycles <-ktime_get
+  <idle>-0       0dN.h...   29us+: hrtimer_forward <-watchdog_timer_fn
+  <idle>-0       0dN.h...   31us+: ktime_add_safe <-hrtimer_forward
+  <idle>-0       0dN.h...   33us+: ktime_add_safe <-hrtimer_forward
+  <idle>-0       0dN.h...   36us+: __touch_watchdog <-watchdog_timer_fn
+  <idle>-0       0dN.h...   38us+: _raw_spin_lock <-__run_hrtimer
+  <idle>-0       0dN.h...   40us+: enqueue_hrtimer <-__run_hrtimer
+  <idle>-0       0dN.h...   42us+: __run_hrtimer <-hrtimer_interrupt
+  <idle>-0       0dN.h...   44us+: __remove_hrtimer <-__run_hrtimer
+  <idle>-0       0dN.h...   47us+: _raw_spin_unlock <-__run_hrtimer
+  <idle>-0       0dN.h...   49us+: tick_sched_timer <-__run_hrtimer
+  <idle>-0       0dN.h...   51us+: ktime_get <-tick_sched_timer
+  <idle>-0       0dN.h...   53us+: clocksource_read_cycles <-ktime_get
+  <idle>-0       0dN.h...   55us+: tick_sched_do_timer <-tick_sched_timer
+  <idle>-0       0dN.h...   57us+: tick_do_update_jiffies64 <-tick_sched_timer
+  <idle>-0       0dN.h...   59us+: _raw_spin_lock <-tick_do_update_jiffies64
+  <idle>-0       0dN.h...   61us+: do_timer <-tick_do_update_jiffies64
+  <idle>-0       0dN.h...   63us+: _raw_spin_lock_irqsave <-do_timer
+  <idle>-0       0dN.h...   65us+: clocksource_read_cycles <-do_timer
+  <idle>-0       0dN.h...   67us+: _raw_spin_unlock_irqrestore <-do_timer

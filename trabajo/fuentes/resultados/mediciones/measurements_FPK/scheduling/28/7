@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 1562 us, #692/692, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: irq/80-mmc0-63 (uid:0 nice:0 policy:1 rt_prio:50)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+ mmcqd/0-65      0d..h311    3us+:     65:120:R   + [000]    63: 49:R irq/80-mmc0
+ mmcqd/0-65      0d..h311   10us+: 0
+ mmcqd/0-65      0d..h311   13us+: check_preempt_curr <-ttwu_do_wakeup
+ mmcqd/0-65      0d..h311   15us+: resched_task <-check_preempt_curr
+ mmcqd/0-65      0dN.h311   18us+: task_woken_rt <-ttwu_do_wakeup
+ mmcqd/0-65      0dN.h311   20us+: _raw_spin_unlock <-try_to_wake_up
+ mmcqd/0-65      0dN.h311   22us+: sub_preempt_count <-_raw_spin_unlock
+ mmcqd/0-65      0dN.h211   25us+: ttwu_stat <-try_to_wake_up
+ mmcqd/0-65      0dN.h211   27us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+ mmcqd/0-65      0dN.h211   29us+: sub_preempt_count <-_raw_spin_unlock_irqrestore
+ mmcqd/0-65      0dN.h111   32us+: note_interrupt <-handle_irq_event_percpu
+ mmcqd/0-65      0dN.h111   34us+: _raw_spin_lock <-handle_irq_event
+ mmcqd/0-65      0dN.h111   36us+: add_preempt_count <-_raw_spin_lock
+ mmcqd/0-65      0dN.h211   38us+: cond_unmask_irq <-handle_level_irq
+ mmcqd/0-65      0dN.h211   40us+: _raw_spin_unlock <-generic_handle_irq
+ mmcqd/0-65      0dN.h211   42us+: sub_preempt_count <-_raw_spin_unlock
+ mmcqd/0-65      0dN.h111   44us+: irq_exit <-handle_IRQ
+ mmcqd/0-65      0dN.h111   47us+: sub_preempt_count <-irq_exit
+ mmcqd/0-65      0dN..211   49us+: idle_cpu <-irq_exit
+ mmcqd/0-65      0dN..211   51us+: rcu_irq_exit <-irq_exit
+ mmcqd/0-65      0dN..211   53us+: sub_preempt_count <-handle_IRQ
+ mmcqd/0-65      0dN..111   56us+: irq_find_mapping <-omap3_intc_handle_irq
+ mmcqd/0-65      0dN..111   58us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+ mmcqd/0-65      0dN..111   60us+: handle_IRQ <-omap3_intc_handle_irq
+ mmcqd/0-65      0dN..111   62us+: irq_enter <-handle_IRQ
+ mmcqd/0-65      0dN..111   64us+: rcu_irq_enter <-irq_enter
+ mmcqd/0-65      0dN..111   66us+: add_preempt_count <-irq_enter
+ mmcqd/0-65      0dN.h111   68us+: generic_handle_irq <-handle_IRQ
+ mmcqd/0-65      0dN.h111   71us+: irq_to_desc <-generic_handle_irq

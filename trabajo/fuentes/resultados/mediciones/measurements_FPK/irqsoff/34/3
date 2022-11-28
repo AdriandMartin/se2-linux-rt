@@ -1,0 +1,50 @@
+cpus=1
+# tracer: irqsoff
+#
+# irqsoff latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 1195 us, #573/573, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: stress-ng-sleep-2598 (uid:0 nice:0 policy:0 rt_prio:0)
+#    -----------------
+#  => started at: __irq_svc
+#  => ended at:   __irq_svc
+#
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+stress-n-2598    0d...2..    1us+: __irq_svc
+stress-n-2598    0d...3..    3us+: irq_find_mapping <-omap3_intc_handle_irq
+stress-n-2598    0d...3..    5us+: irq_domain_legacy_revmap <-omap3_intc_handle_irq
+stress-n-2598    0d...3..    7us+: handle_IRQ <-omap3_intc_handle_irq
+stress-n-2598    0d...3..    9us+: irq_enter <-handle_IRQ
+stress-n-2598    0d...3..   11us+: rcu_irq_enter <-irq_enter
+stress-n-2598    0d...3..   13us+: add_preempt_count <-irq_enter
+stress-n-2598    0d..h3..   15us+: generic_handle_irq <-handle_IRQ
+stress-n-2598    0d..h3..   17us+: irq_to_desc <-generic_handle_irq
+stress-n-2598    0d..h3..   19us+: handle_level_irq <-generic_handle_irq
+stress-n-2598    0d..h3..   21us+: _raw_spin_lock <-handle_level_irq
+stress-n-2598    0d..h3..   23us+: add_preempt_count <-_raw_spin_lock
+stress-n-2598    0d..h4..   25us+: irq_gc_mask_disable_reg <-handle_level_irq
+stress-n-2598    0d..h4..   26us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+stress-n-2598    0d..h4..   28us+: add_preempt_count <-_raw_spin_lock
+stress-n-2598    0d..h5..   31us+: _raw_spin_unlock <-handle_level_irq
+stress-n-2598    0d..h5..   33us+: sub_preempt_count <-_raw_spin_unlock
+stress-n-2598    0d..h4..   35us+: omap_mask_ack_irq <-handle_level_irq
+stress-n-2598    0d..h4..   37us+: irq_gc_mask_disable_reg <-omap_mask_ack_irq
+stress-n-2598    0d..h4..   39us+: _raw_spin_lock <-irq_gc_mask_disable_reg
+stress-n-2598    0d..h4..   40us+: add_preempt_count <-_raw_spin_lock
+stress-n-2598    0d..h5..   42us+: _raw_spin_unlock <-omap_mask_ack_irq
+stress-n-2598    0d..h5..   44us+: sub_preempt_count <-_raw_spin_unlock
+stress-n-2598    0d..h4..   46us+: handle_irq_event <-handle_level_irq
+stress-n-2598    0d..h4..   48us+: _raw_spin_unlock <-handle_irq_event
+stress-n-2598    0d..h4..   50us+: sub_preempt_count <-_raw_spin_unlock

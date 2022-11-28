@@ -1,0 +1,50 @@
+cpus=1
+# tracer: wakeup
+#
+# wakeup latency trace v1.1.5 on 3.8.13-rt14
+# --------------------------------------------------------------------
+# latency: 1781 us, #801/801, CPU#0 | (M:preempt VP:0, KP:0, SP:0 HP:0 #P:1)
+#    -----------------
+#    | task: watchdog/0-13 (uid:0 nice:0 policy:1 rt_prio:99)
+#    -----------------
+#
+#                   _--------=> CPU#              
+#                  / _-------=> irqs-off          
+#                 | / _------=> need-resched      
+#                 || / _-----=> need-resched_lazy 
+#                 ||| / _----=> hardirq/softirq   
+#                 |||| / _---=> preempt-depth     
+#                 ||||| / _--=> preempt-lazy-depth
+#                 |||||| / _-=> migrate-disable   
+#                 ||||||| /     delay             
+#  cmd     pid    |||||||| time  |   caller       
+#     \   /      ||||||||  \   |   /            
+stress-n-1373    0d..h4..    2us+:   1373:120:S   + [000]    13:  0:R watchdog/0
+stress-n-1373    0d..h4..    6us+: 0
+stress-n-1373    0d..h4..    9us+: check_preempt_curr <-ttwu_do_wakeup
+stress-n-1373    0d..h4..   11us+: resched_task <-check_preempt_curr
+stress-n-1373    0dN.h4..   13us+: task_woken_rt <-ttwu_do_wakeup
+stress-n-1373    0dN.h4..   16us+: _raw_spin_unlock <-try_to_wake_up
+stress-n-1373    0dN.h4..   18us+: sub_preempt_count <-_raw_spin_unlock
+stress-n-1373    0dN.h3..   20us+: ttwu_stat <-try_to_wake_up
+stress-n-1373    0dN.h3..   23us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
+stress-n-1373    0dN.h3..   25us+: sub_preempt_count <-_raw_spin_unlock_irqrestore
+stress-n-1373    0dN.h2..   27us+: ktime_get <-watchdog_timer_fn
+stress-n-1373    0dN.h2..   30us+: clocksource_read_cycles <-ktime_get
+stress-n-1373    0dN.h2..   32us+: hrtimer_forward <-watchdog_timer_fn
+stress-n-1373    0dN.h2..   34us+: ktime_add_safe <-hrtimer_forward
+stress-n-1373    0dN.h2..   36us+: ktime_add_safe <-hrtimer_forward
+stress-n-1373    0dN.h2..   38us+: __touch_watchdog <-watchdog_timer_fn
+stress-n-1373    0dN.h2..   41us+: _raw_spin_lock <-__run_hrtimer
+stress-n-1373    0dN.h2..   43us+: add_preempt_count <-_raw_spin_lock
+stress-n-1373    0dN.h3..   45us+: enqueue_hrtimer <-__run_hrtimer
+stress-n-1373    0dN.h3..   48us+: __run_hrtimer <-hrtimer_interrupt
+stress-n-1373    0dN.h3..   50us+: __remove_hrtimer <-__run_hrtimer
+stress-n-1373    0dN.h3..   53us+: _raw_spin_unlock <-__run_hrtimer
+stress-n-1373    0dN.h3..   55us+: sub_preempt_count <-_raw_spin_unlock
+stress-n-1373    0dN.h2..   57us+: tick_sched_timer <-__run_hrtimer
+stress-n-1373    0dN.h2..   59us+: ktime_get <-tick_sched_timer
+stress-n-1373    0dN.h2..   61us+: clocksource_read_cycles <-ktime_get
+stress-n-1373    0dN.h2..   64us+: tick_sched_do_timer <-tick_sched_timer
+stress-n-1373    0dN.h2..   66us+: tick_do_update_jiffies64 <-tick_sched_timer
+stress-n-1373    0dN.h2..   68us+: _raw_spin_lock <-tick_do_update_jiffies64
